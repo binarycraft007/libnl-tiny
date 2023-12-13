@@ -10,6 +10,8 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     lib.linkLibC();
+    lib.link_gc_sections = false;
+    lib.defineCMacro("_GNU_SOURCE", null);
     inline for (libnl_tiny_src) |src| {
         lib.addCSourceFile(.{
             .file = libnl_dep.path(src),
