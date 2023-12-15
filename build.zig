@@ -18,6 +18,10 @@ pub fn build(b: *std.Build) void {
             .flags = &.{},
         });
     }
+    lib.addCSourceFile(.{
+        .file = .{ .path = "src/genl.c" },
+        .flags = &.{},
+    });
     lib.addIncludePath(libnl_dep.path("include"));
     lib.installHeadersDirectory(libnl_dep.path("include").getPath(b), "");
     b.installArtifact(lib);
